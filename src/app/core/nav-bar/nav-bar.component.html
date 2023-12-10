@@ -1,48 +1,86 @@
-<div class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light">
-  <div class="container">
+<!-- First navbar -->
+<div *ngIf="!isMainNavbarFixed">
+  <nav class="navbar navbar-expand-lg" style="background-color: #f2f2f2;">
+    <div class="container-fluid">
+      <div class="w-100 d-flex justify-content-between">
+        <div class="contact infos-ticker" (mouseenter)="pauseTicker(true)" (mouseleave)="pauseTicker(false)">
+          <i class="fa-solid fa-envelope me-1"></i>
+          <a href="#" class="navbar-sm-brand text-dark text-decoration-none me-4">gearhubster@gmail.com</a>
+          <i class="fa-solid fa-mobile-screen me-1"></i>
+          <a href="#" class="navbar-sm-brand text-dark text-decoration-none">+33 6 20 09 35 17</a>
+        </div>
+        <div class="sales infos-ticker" (mouseenter)="pauseTicker(true)" (mouseleave)="pauseTicker(false)">
+          <i class="fa-solid fa-burst me-2"></i>Black Friday 2023!! -50% on 2nd online purchase
+        </div>
+        <div class="media infos-ticker" (mouseenter)="pauseTicker(true)" (mouseleave)="pauseTicker(false)">
+          Join us |
+          <a href="#" class="text-dark"><i class="fa-brands fa-facebook me-2"></i></a>
+          <a href="#" class="text-dark"><i class="fa-brands fa-instagram me-2"></i></a>
+          <a href="#" class="text-dark"><i class="fa-brands fa-x-twitter me-2"></i></a>
+          <a href="#" class="text-dark"><i class="fa-brands fa-tiktok me-2"></i></a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<!-- Main navbar -->
+<nav id="mainNavBar" [ngClass]="{'fixed-top': isMainNavbarFixed}" class="navbar navbar-expand-lg bg-white">
+  <div class="container-fluid">
     <div class="navbar-brand">
-      <a href="#">
-        <img src="assets/images/logo-v2.png" alt="logo" style="max-height: 40px;">
-      </a>
+      <div>
+        <a href="#"><img src="assets/images/logo-v2.png" alt="logo" style="max-height: 50px;"></a>
+      </div>
     </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
       aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav">
-        <a class="nav-link active" href="#">Home
-          <span class="visually-hidden">(current)</span>
-        </a>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Contact</a>
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item nav-items">
+          <a class="nav-link active nav-links" aria-current="page" href="#">home</a>
         </li>
-        <li class="nav-item dropdown" data-bs-theme="light">
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="download">Shop</a>
+        <li class="nav-item nav-items">
+          <a class="nav-link active nav-links" aria-current="page" href="#">about</a>
+        </li>
+        <li class="nav-item nav-items">
+          <a class="nav-link nav-links" href="#">contact</a>
+        </li>
+        <li class="nav-item dropdown nav-items" data-bs-theme="light">
+          <a class="nav-link dropdown-toggle nav-links" data-bs-toggle="dropdown" href="#" id="download">shop</a>
           <div class="dropdown-menu" aria-labelledby="download">
             <a class="dropdown-item" rel="noopener" target="_blank" href="#">Open in JSFiddle</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#" download="">bootstrap.css</a>
             <a class="dropdown-item" href="#" download="">bootstrap.min.css</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#" download="">bootstrap.rtl.css</a>
-            <a class="dropdown-item" href="#" download="">bootstrap.rtl.min.css</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#" download="">_variables.scss</a>
-            <a class="dropdown-item" href="#" download="">_bootswatch.scss</a>
           </div>
         </li>
       </ul>
+
       <ul class="navbar-nav ms-md-auto">
         <li class="nav-item">
-          <a href="#" class="cart-icon">
-            <i class="fas fa-cart-shopping fas-lg nav-link"></i>
+          <div class="search">
+            <span class="search-icon">
+              <i class="fa fa-search fa-lg searchBtn" [class.active]="isSearchActive" (click)="openSearch()"></i>
+              <i class="fa-solid fa-xmark fa-xl closeBtn" [class.active]="isSearchActive" (click)="closeSearch()"></i>
+            </span>
+          </div>
+        </li>
+        <li class="nav-item">
+          <div class="searchBox" [class.active]="isSearchActive">
+            <input type="text" placeholder="Search GearHubster...">
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="https://www.google.com/" class="text-dark nav-icon cart-icon">
+            <i class="fa-solid fa-cart-arrow-down fa-lg"></i>
             <div class="cart-notification">13</div>
           </a>
         </li>
         <li class="nav-item dropdown" data-bs-theme="light">
-          <a class="nav-link dropdown-toggle" href="#" id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown"
-            data-bs-display="static" aria-label="Toggle theme">
+          <a href="#" class="dropdown-toggle text-dark nav-icon" id="theme-menu" aria-expanded="false"
+            data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme">
             <i class="fa-solid fa-user fa-lg"></i>
             <span class="d-lg-none ms-2">User</span>
           </a>
@@ -63,4 +101,3 @@
       </ul>
     </div>
   </div>
-</div>
