@@ -1,53 +1,36 @@
 <div class="container">
     <div class="row">
-        <section class="col-3" style="padding-top: 50px;">
+        <section class="col-3" style="padding-top: 44px;">
             <div class="card border-secondary mb-3" style="max-width: 20rem;">
                 <div class="card-body">
-                    <h6 class="card-title">Sort</h6>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked="">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Alphabetical
-                        </label>
+                    <div class="card-title"><strong>Sort by:</strong></div>
+                    <div class="form-group">
+                        <select class="form-select" (change)="onSortSelected($event)">
+                            <option *ngFor="let sort of sortOptions" [value]="sort.value">
+                                {{sort.name}}
+                            </option>
+                        </select>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Price: Low to high
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Price: High to low
+                    <hr>
+                    <div class="card-title"><strong>Brands</strong></div>
+                    <div class="form-check" *ngFor="let brand of brands">
+                        <input class="form-check-input" type="checkbox" value=""
+                            [checked]="brand.id===brandIdSelected" [value]="brand.id"
+                            [id]="brand.id"
+                            (click)="onBrandSelected(brand.id)">
+                        <label class="form-check-label" [for]="brand.id">
+                            {{brand.name}}
                         </label>
                     </div>
                     <hr>
-                    <h6 class="card-title">Brands</h6>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            LG
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked="">
-                        <label class="form-check-label" for="flexCheckChecked">
-                            Samsung
-                        </label>
-                    </div>
-                    <hr>
-                    <h6 class="card-title">Types</h6>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Fitness
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked="">
-                        <label class="form-check-label" for="flexCheckChecked">
-                            Food
+                    <div class="card-title"><strong>Types</strong></div>
+                    <div class="form-check" *ngFor="let type of types">
+                        <input class="form-check-input" type="checkbox" value=""
+                            [checked]="type.id===typeIdSelected" [value]="type.id"
+                            [id]="type.id"
+                            (click)="onTypeSelected(type.id)">
+                        <label class="form-check-label" [for]="type.id">
+                            {{type.name}}
                         </label>
                     </div>
                 </div>
