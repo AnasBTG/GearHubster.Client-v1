@@ -1,0 +1,49 @@
+.custom-img {
+    object-fit: contain;
+    height: 223px;
+    width: 100%;
+}
+
+.card-title {
+    font-family: sans-serif;
+    color: black;
+    text-decoration: none;
+    font-weight: normal;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.card-title:hover {
+    color: #e47911;
+    font-weight: normal;
+}
+
+.product-price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #B12704;
+    display: inline-block;
+}
+
+.symbole-monnaie {
+    font-size: 14px;
+    font-weight: normal;
+    vertical-align: super;
+}
+
+.decimals {
+    font-size: 14px;
+    font-weight: normal;
+    vertical-align: super;
+}
+
+.product-rating {
+    font-size: 14px;
+    display: inline-block;
+}
+
+.product-rating i {
+    color: #FF9900;
+    margin-right: 3px;
+    text-shadow: 0 0 3px #874D00;
+}
