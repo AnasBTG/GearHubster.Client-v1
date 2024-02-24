@@ -3,14 +3,14 @@
         <section class="col-3">
             <div class="d-flex justify-content-between align-items-center">
                 <header>
-                    <span class="search"><i class="fa-solid fa-filter me-2"></i></span>
+                    <span class="filter"><i class="fa-solid fa-filter me-2"></i>Filters</span>
                 </header>
             </div>
             <div class="card mb-3" style="max-width: 20rem;">
                 <div class="card-body">
                     <div class="card-title"><strong>Sort by:</strong></div>
                     <div class="form-group">
-                        <select class="form-select" (change)="onSortSelected($event)">
+                        <select class="form-select" (change)="onSortSelected($event)" id="sortSelect">
                             <option *ngFor="let sort of sortOptions" [value]="sort.value">
                                 {{sort.name}}
                             </option>
@@ -19,22 +19,22 @@
                     <hr>
                     <div class="card-title"><strong>Brands</strong></div>
                     <div class="form-check" *ngFor="let brand of brands">
-                        <input class="form-check-input" type="checkbox" value=""
-                            [checked]="brand.id===brandIdSelected" [value]="brand.id"
-                            [id]="brand.id"
+                        <input class="form-check-input" type="checkbox"
+                            [checked]="brand.id===shopParams.brandId" [value]="brand.id"
+                            [id]="'brand-' + brand.id"
                             (click)="onBrandSelected(brand.id)">
-                        <label class="form-check-label" [for]="brand.id">
+                        <label class="form-check-label" [for]="'brand-' + brand.id">
                             {{brand.name}}
                         </label>
                     </div>
                     <hr>
                     <div class="card-title"><strong>Types</strong></div>
                     <div class="form-check" *ngFor="let type of types">
-                        <input class="form-check-input" type="checkbox" value=""
-                            [checked]="type.id===typeIdSelected" [value]="type.id"
-                            [id]="type.id"
+                        <input class="form-check-input" type="checkbox"
+                            [checked]="type.id===shopParams.typeId" [value]="type.id"
+                            [id]="'type-' + type.id"
                             (click)="onTypeSelected(type.id)">
-                        <label class="form-check-label" [for]="type.id">
+                        <label class="form-check-label" [for]="'type-' + type.id">
                             {{type.name}}
                         </label>
                     </div>
@@ -43,14 +43,24 @@
         </section>
         <section class="col-9">
             <div class="d-flex justify-content-between align-items-center">
-                <header>
-                    <span class="search">Showing <strong>10</strong> of <strong>18</strong> Results</span>
-                </header>
+            <app-pagination-header
+                [totalCount]="totalCount"
+                [pageNumber]="shopParams.pageNumber"
+                [pageSize]="shopParams.pageSize"
+            ></app-pagination-header>
             </div>
-            <div class="row row-cols-3 g-3">
+            <div class="row row-cols-3 g-3 mb-4">
                 <div class="col" *ngFor="let product of products">
                     <app-product-item [product]="product"></app-product-item>
                 </div>
+            </div>
+
+            <div class="d-flex justify-content-center" *ngIf="totalCount > 0">
+                <app-pager
+                    [totalCount]="totalCount"
+                    [pageSize]="shopParams.pageSize"
+                    (pageChanged)="onPageChanged($event)" 
+                ></app-pager>
             </div>
         </section>
     </div>
