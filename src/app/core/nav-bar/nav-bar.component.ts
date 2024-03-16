@@ -1,4 +1,6 @@
 import { Component, HostListener } from '@angular/core';
+import { SearchService } from 'src/app/search/search.service';
+import { ShopParams } from 'src/app/shared/models/shopParams';
 
 @Component({
   selector: 'app-nav-bar',
@@ -7,8 +9,10 @@ import { Component, HostListener } from '@angular/core';
 })
 export class NavBarComponent {
   isMainNavbarFixed: boolean = false;
-
   isSearchActive = false;
+  shopParams = new ShopParams();
+
+  constructor(private searchService: SearchService) {}
 
   @HostListener('window:scroll', ['$event'])
 
@@ -26,9 +30,22 @@ export class NavBarComponent {
     console.log("Search opened");
   }
 
+  performSearch(event: any) {
+    const searchTerm = (event.target as HTMLInputElement).value;
+    console.log("Performing search with term:", searchTerm);
+    this.searchService.updateSearchParams({ search: searchTerm });
+  }  
+
   closeSearch() {
     this.isSearchActive = false;
-    console.log("Search opened");
+    const searchInput = document.getElementById('searchInput') as HTMLInputElement;
+    if (searchInput) {
+      searchInput.value = '';
+      console.log("Search closed");
+      this.searchService.updateSearchParams({ search: '' });
+    } else {
+      console.error("Search input element not found.");
+    }
   }
 
   pauseTicker(pause: boolean) {
