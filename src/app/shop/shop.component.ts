@@ -4,6 +4,7 @@ import { ShopService } from './shop.service';
 import { Brand } from '../shared/models/brand';
 import { Type } from '../shared/models/type';
 import { ShopParams } from '../shared/models/shopParams';
+import { SearchService } from '../search/search.service';
 
 @Component({
   selector: 'app-shop',
@@ -22,10 +23,13 @@ export class ShopComponent implements OnInit {
   ];
   totalCount = 0;
 
-  constructor(private shopService: ShopService) { }
+  constructor(private shopService: ShopService, private searchService: SearchService) { }
 
   ngOnInit(): void {
-    this.getProducts();
+    this.searchService.currentSearchParams.subscribe(params => {
+      this.shopParams = params;
+      this.getProducts();
+    });
     this.getBrands();
     this.getTypes();
   }
